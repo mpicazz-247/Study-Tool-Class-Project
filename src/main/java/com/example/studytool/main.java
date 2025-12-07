@@ -2,8 +2,8 @@ package com.example.studytool;
 
 import javafx.application.Application;
 
-public class Launcher {
+public class main {
     public static void main(String[] args) {
-        Application.launch(HelloApplication.class, args);
+
     }
 }
