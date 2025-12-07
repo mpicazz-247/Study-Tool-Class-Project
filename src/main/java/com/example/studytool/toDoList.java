@@ -11,8 +11,8 @@ public class toDoList {
     public void addTask(Task t){
         tasks.add(t);
     } //adds a task to list
-    public void removeTask(Task t){
-        tasks.remove(t);
+    public void removeTask(int index){
+        tasks.remove(index);
     }//removes a task from list
 
     public List<Task> getTasks(){
