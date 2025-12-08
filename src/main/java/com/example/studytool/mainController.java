@@ -1,9 +1,5 @@
 package com.example.studytool;
 
+public class mainController {
 
-import javafx.event.ActionEvent;
-
-public class timerController {
-    public void onHelloButtonClick(ActionEvent actionEvent) {
-    }
 }
