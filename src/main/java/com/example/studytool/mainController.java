@@ -27,12 +27,62 @@ public class mainController {
     private pomodoroTimer timer;
 
     @FXML
-    public void intialize(){
+    public void intialize() {
         //setting the default values of the timer to
         // 1 repetition, 5 minutes of break, and 25 minutes of studying
-        settings = new timerSettings(1,5,25);
+        settings = new timerSettings(1, 5, 25);
         timer = new pomodoroTimer(settings, () -> {
-            timerLabel.setText(timer.getRemainingSeconds()/60+ " (" + timer.getPhase() + ")");
+            timerLabel.setText(timer.getFormattedTime() + " (" + timer.getPhase() + ")");
         });
+
+        repetetionSelector.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8));
+        repetetionSelector.setValue(1);
+
+        taskListView.setItems(tasks);
+        timerLabel.setText(timer.getFormattedTime());
+    }
+}
+//Timer actions
+@FXML
+private void startStopTimer(){
+    if("Start".equals(startStopButton.getText())){
+        timer.start();
+        startStopButton.setText("Stop");
+    }else{
+        timer.stop();
+        startStopButton.setText("Start");
+    }
+}
+@FXML
+private void skipButton(){
+    timer.skip();
+}
+@FXML
+private void resetTimer){
+    timer.reset();
+    startStopButton.setText("Start");
+}
+//To-Do actions
+@FXML
+private void addTask(){
+    String title = taskInput.getText();
+    if(!title.isEmpty()){
+        tasks.add(new task(title));
+        taskInput.clear();
+    }
+}
+@FXML
+private void toggleButton(){
+    task selected taskListView.getSelectionModel().getSelectedItem();
+    if(selected !=null){
+        selected.setCompleted(!selected.getCompleted());
+        taskListView.refresh();
+    }
+}
+@FXML
+private void removeButton(){
+    task selected = taskListView.getSelectionModel().getSelectedItem();
+    if(selected != null){
+        tasks.remove(selected);
     }
 }

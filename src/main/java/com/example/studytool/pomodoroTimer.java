@@ -10,12 +10,14 @@ public class pomodoroTimer {
     private String phase; //imported data type
     private int remainingSeconds; //remaining minutes*60
     private int currentRepetition; //current repetition in cycle
+    private Runnable onUpdate; //callsback
 //constructor
     public pomodoroTimer(timerSettings settings){
         this.settings = settings;
         this.phase = "STUDY"; //starts off at study interval before break
         this.remainingSeconds = settings.getStudyTime() * 60;
         this.currentRepetition = 1;
+        this.onUpdate = onUpdate;
         //create a timeline, ticks every second
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e->tick()));
         //make it loop indefinitely
@@ -33,6 +35,9 @@ public class pomodoroTimer {
         phase = "STUDY";
         remainingSeconds = settings.getStudyTime()*60;
         currentRepetition=1;
+        if(onUpdate != null){
+            onUpdate.run();
+        }
     }
     public void skip(){
         switchPhase();
@@ -40,7 +45,10 @@ public class pomodoroTimer {
 
     private void tick(){
         remainingSeconds--; //timer goes down by one seconds every second
-        if(remainingSeconds<=0){ //checks to see if time left is zero or not
+        if(onUpdate != null){
+            onUpdate.run();
+        }
+        if(remainingSeconds< =0){ //checks to see if time left is zero or not
             switchPhase(); //phase is switched if yes
         }
     }
@@ -59,6 +67,9 @@ public class pomodoroTimer {
             phase = "STUDY"; //phase is switched
             remainingSeconds = settings.getStudyTime()*60; //study time in seconds is set
         }
+        if (onUpdate != null) {
+            onUpdate.run();
+        }
     }
 //getters
     public String getPhase(){
@@ -69,6 +80,12 @@ public class pomodoroTimer {
     }
     public int getCurrentRepetition(){
         return currentRepetition;
+    }
+    //format time in mm:ss
+    public String getFormattedTime(){
+        int minutes = remainingSeconds/60; //whole minutes
+        int seconds = remainingSeconds%60; //remainding seconds
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
 }
