@@ -14,7 +14,7 @@ public class mainController {
     @FXML private Button resetButton;
     @FXML private RadioButton mode25_5;
     @FXML private RadioButton mode50_10;
-    @FXML private ComboBox<Integer> repetetionSelector;
+    @FXML private ComboBox<Integer> repetitionSelector;
     // to-do list UI
     @FXML private Button addButton;
     @FXML private Button toggleButton;
@@ -27,7 +27,7 @@ public class mainController {
     private pomodoroTimer timer;
 
     @FXML
-    public void intialize() {
+    public void initialize() {
         //setting the default values of the timer to
         // 1 repetition, 5 minutes of break, and 25 minutes of studying
         settings = new timerSettings(1, 5, 25);
@@ -35,54 +35,55 @@ public class mainController {
             timerLabel.setText(timer.getFormattedTime() + " (" + timer.getPhase() + ")");
         });
 
-        repetetionSelector.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8));
-        repetetionSelector.setValue(1);
+        repetitionSelector.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8));
+        repetitionSelector.setValue(1);
 
         taskListView.setItems(tasks);
         timerLabel.setText(timer.getFormattedTime());
     }
-}
-//Timer actions
-@FXML
-private void startStopTimer(){
-    if("Start".equals(startStopButton.getText())){
-        timer.start();
-        startStopButton.setText("Stop");
-    }else{
-        timer.stop();
+
+    //Timer actions
+    @FXML
+    private void startStopTimer(){
+        if("Start".equals(startStopButton.getText())){
+            timer.start();
+            startStopButton.setText("Stop");
+        }else{
+            timer.stop();
+            startStopButton.setText("Start");
+        }
+    }
+    @FXML
+    private void skipButton(){
+        timer.skip();
+    }
+    @FXML
+    private void resetTimer(){
+        timer.reset();
         startStopButton.setText("Start");
     }
-}
-@FXML
-private void skipButton(){
-    timer.skip();
-}
-@FXML
-private void resetTimer){
-    timer.reset();
-    startStopButton.setText("Start");
-}
-//To-Do actions
-@FXML
-private void addTask(){
-    String title = taskInput.getText();
-    if(!title.isEmpty()){
-        tasks.add(new task(title));
-        taskInput.clear();
+    //To-Do actions
+    @FXML
+    private void addTask(){
+        String title = taskInput.getText();
+        if(!title.isEmpty()){
+            tasks.add(new task(title));
+            taskInput.clear();
+        }
     }
-}
-@FXML
-private void toggleButton(){
-    task selected taskListView.getSelectionModel().getSelectedItem();
-    if(selected !=null){
-        selected.setCompleted(!selected.getCompleted());
-        taskListView.refresh();
+    @FXML
+    private void toggleButton(){
+        task selected = taskListView.getSelectionModel().getSelectedItem();
+        if(selected !=null){
+            selected.setCompleted(!selected.getCompleted());
+            taskListView.refresh();
+        }
     }
-}
-@FXML
-private void removeButton(){
-    task selected = taskListView.getSelectionModel().getSelectedItem();
-    if(selected != null){
-        tasks.remove(selected);
+    @FXML
+    private void removeButton(){
+        task selected = taskListView.getSelectionModel().getSelectedItem();
+        if(selected != null){
+            tasks.remove(selected);
+        }
     }
 }

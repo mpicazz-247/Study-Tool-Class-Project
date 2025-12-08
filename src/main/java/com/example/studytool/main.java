@@ -3,6 +3,7 @@ package com.example.studytool;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 public class main extends Application {
 

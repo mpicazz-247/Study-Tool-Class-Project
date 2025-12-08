@@ -12,7 +12,7 @@ public class pomodoroTimer {
     private int currentRepetition; //current repetition in cycle
     private Runnable onUpdate; //callsback
 //constructor
-    public pomodoroTimer(timerSettings settings){
+    public pomodoroTimer(timerSettings settings, Runnable onUpdate){
         this.settings = settings;
         this.phase = "STUDY"; //starts off at study interval before break
         this.remainingSeconds = settings.getStudyTime() * 60;
@@ -48,7 +48,7 @@ public class pomodoroTimer {
         if(onUpdate != null){
             onUpdate.run();
         }
-        if(remainingSeconds< =0){ //checks to see if time left is zero or not
+        if(remainingSeconds<=0){ //checks to see if time left is zero or not
             switchPhase(); //phase is switched if yes
         }
     }
