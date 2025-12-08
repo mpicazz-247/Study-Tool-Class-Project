@@ -2,18 +2,24 @@ package com.example.studytool;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Animation;
 import javafx.util.Duration;
 
-public class pomodoroTimer {
-    private timerSettings settings; //timer setting
+public class PomodoroTimer {
+    private static final String Study = "STUDY";
+    private static final String Break = "BREAK";
+
+    private TimerSettings settings; //timer setting
     private Timeline timeline; //imported data type
     private String phase; //imported data type
+
     private int remainingSeconds; //remaining minutes*60
     private int currentRepetition; //current repetition in cycle
+
     private Runnable onUpdate; //callsback
 //constructor
-    public pomodoroTimer(timerSettings settings, Runnable onUpdate){
-        this.settings = settings;
+    public PomodoroTimer(TimerSettings newSettings, Runnable onUpdate){
+        this.settings = newSettings;
         this.phase = "STUDY"; //starts off at study interval before break
         this.remainingSeconds = settings.getStudyTime() * 60;
         this.currentRepetition = 1;
@@ -39,12 +45,17 @@ public class pomodoroTimer {
             onUpdate.run();
         }
     }
+    public void resetWithSettings(TimerSettings newSettings){
+        this.settings = newSettings;
+        reset();
+    }
     public void skip(){
         switchPhase();
     }
 
     private void tick(){
         remainingSeconds--; //timer goes down by one seconds every second
+
         if(onUpdate != null){
             onUpdate.run();
         }
@@ -58,6 +69,9 @@ public class pomodoroTimer {
             //checks to see if all repetitions
             if(currentRepetition >= settings.getRepetition()){
                 timeline.stop(); //if completed the timer is stopped
+                if(onUpdate != null){
+                    onUpdate.run();
+                }
                 return;
             }
             phase = "BREAK"; //phase is switched
@@ -86,6 +100,10 @@ public class pomodoroTimer {
         int minutes = remainingSeconds/60; //whole minutes
         int seconds = remainingSeconds%60; //remainding seconds
         return String.format("%02d:%02d", minutes, seconds);
+    }
+
+    public boolean isRunning(){
+        return timeline.getStatus() == Animation.Status.RUNNING;
     }
 
 }

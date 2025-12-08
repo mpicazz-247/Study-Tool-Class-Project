@@ -5,12 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-public class main extends Application {
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         //load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studytool/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("main.fxml"));
         Scene scene = new Scene(loader.load());
 
         primaryStage.setTitle("Pomodoro Study Tool");

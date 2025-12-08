@@ -1,11 +1,11 @@
 package com.example.studytool;
 
-public class timerSettings {
+public class TimerSettings {
     private int repetition; //number of times pomodoro timer repeats itself
     private int breakTime; //length of breaks in minutes
     private int studyTime; //length of study intervals in minutes
     //constructor to allow settings objects to be created later in other classes
-    public timerSettings(int repetition, int breakTime, int studyTime){
+    public TimerSettings(int repetition, int breakTime, int studyTime){
         this.repetition = repetition;
         this.breakTime = breakTime;
         this.studyTime = studyTime;
