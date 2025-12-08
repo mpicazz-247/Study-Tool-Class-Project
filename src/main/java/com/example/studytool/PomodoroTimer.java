@@ -6,8 +6,8 @@ import javafx.animation.Animation;
 import javafx.util.Duration;
 
 public class PomodoroTimer {
-    private static final String Study = "STUDY";
-    private static final String Break = "BREAK";
+    private static final String STUDY = "STUDY";
+    private static final String BREAK = "BREAK";
 
     private TimerSettings settings; //timer setting
     private Timeline timeline; //imported data type
@@ -38,7 +38,7 @@ public class PomodoroTimer {
     }
     public void reset(){
         timeline.stop();
-        phase = "STUDY";
+        phase = STUDY;
         remainingSeconds = settings.getStudyTime()*60;
         currentRepetition=1;
         if(onUpdate != null){
@@ -51,6 +51,9 @@ public class PomodoroTimer {
     }
     public void skip(){
         switchPhase();
+        if(onUpdate != null){
+            onUpdate.run();
+        }
     }
 
     private void tick(){
@@ -65,7 +68,7 @@ public class PomodoroTimer {
     }
 
     private void switchPhase(){
-        if(phase.equals("STUDY")){
+        if(phase.equals(STUDY)){
             //checks to see if all repetitions
             if(currentRepetition >= settings.getRepetition()){
                 timeline.stop(); //if completed the timer is stopped
@@ -74,11 +77,11 @@ public class PomodoroTimer {
                 }
                 return;
             }
-            phase = "BREAK"; //phase is switched
+            phase = BREAK; //phase is switched
             remainingSeconds = settings.getBreakTime()*60; //break time in seconds is set
         } else { //after break time, one full repetition is complete
             currentRepetition++; //current repetition goes up by one
-            phase = "STUDY"; //phase is switched
+            phase = STUDY; //phase is switched
             remainingSeconds = settings.getStudyTime()*60; //study time in seconds is set
         }
         if (onUpdate != null) {

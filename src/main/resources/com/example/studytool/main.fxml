@@ -32,12 +32,12 @@
       </Label>
       <HBox layoutX="24.0" layoutY="33.0" prefHeight="35.0" prefWidth="242.0">
          <children>
-            <RadioButton fx:id="mode25_5" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="124.0" text="25/5">
+            <RadioButton fx:id="mode25_5" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleMode25_5" prefHeight="35.0" prefWidth="124.0" text="25/5">
                <font>
                   <Font name="Cambria Math" size="24.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="mode50_10" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="122.0" text="50/10">
+            <RadioButton fx:id="mode50_10" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleMode50_10" prefHeight="35.0" prefWidth="122.0" text="50/10">
                <font>
                   <Font name="Cambria Math" size="24.0" />
                </font>
