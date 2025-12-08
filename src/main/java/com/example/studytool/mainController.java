@@ -28,18 +28,10 @@ public class mainController {
 
     @FXML
     public void initialize() {
-        //setting the default values of the timer to
-        // 1 repetition, 5 minutes of break, and 25 minutes of studying
-        settings = new timerSettings(1, 5, 25);
-        timer = new pomodoroTimer(settings, () -> {
-            timerLabel.setText(timer.getFormattedTime() + " (" + timer.getPhase() + ")");
-        });
-
-        repetitionSelector.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8));
-        repetitionSelector.setValue(1);
-
-        taskListView.setItems(tasks);
-        timerLabel.setText(timer.getFormattedTime());
+        ToggleGroup modeGroup = new ToggleGroup();
+        mode25_5.setToggleGroup(modeGroup);
+        mode50_10.setToggleGroup(modeGroup);
+        mode25_5.setSelected(true);
     }
 
     //Timer actions

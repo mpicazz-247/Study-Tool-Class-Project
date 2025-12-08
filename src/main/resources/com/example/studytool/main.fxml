@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studytool.mainController">
    <children>
       <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="52.0" prefHeight="96.0" prefWidth="287.0" text="00:00" textAlignment="CENTER">
@@ -48,7 +47,7 @@
       <ComboBox fx:id="repetitionSelector" layoutX="69.0" layoutY="215.0" prefWidth="150.0" />
       <VBox layoutX="288.0" layoutY="48.0" prefHeight="306.0" prefWidth="306.0" spacing="10.0">
          <children>
-            <Button fx:id="addButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="307.0" style="-fx-background-radius: 20;" text="Add" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addTask" prefHeight="30.0" prefWidth="307.0" style="-fx-background-radius: 20;" text="Add" />
             <HBox prefHeight="29.0" prefWidth="306.0" spacing="5.0">
                <children>
                   <Button fx:id="toggleButton" mnemonicParsing="false" onAction="#toggleButton" style="-fx-background-radius: 20; -fx-background-color: green; -fx-cursor: blue;" text="Toggle" />
